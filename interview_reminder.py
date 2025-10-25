@@ -173,13 +173,15 @@ class InterviewReminder:
         """Create professional email content"""
         
         if time_remaining is None:
-            # Interview has passed
+            # Interview has passed - send follow-up message
             plain_text = f"""
-{greeting_data['greeting']}!
+{greeting_data['greeting']}! {greeting_data['message']}
 
-The scheduled interview time has passed.
+I would love to work and contribute with your company.
 
-Thank you.
+Looking forward to the opportunity to be part of your team and make meaningful contributions.
+
+Thank you for your consideration.
 """
             html_content = f"""
 <!DOCTYPE html>
@@ -187,11 +189,81 @@ Thank you.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f5f5f5;
+        }}
+        
+        .container {{
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }}
+        
+        .greeting {{
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }}
+        
+        .message {{
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 20px;
+        }}
+        
+        .interest-box {{
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 2px solid #3b82f6;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }}
+        
+        .interest-text {{
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 15px;
+        }}
+        
+        .contribution-text {{
+            font-size: 15px;
+            color: #1e3a8a;
+            line-height: 1.8;
+        }}
+        
+        .thank-you {{
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 20px;
+            text-align: center;
+        }}
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-    <p><strong>{greeting_data['greeting']}!</strong></p>
-    <p>The scheduled interview time has passed.</p>
-    <p>Thank you.</p>
+<body>
+    <div class="container">
+        <div class="greeting">{greeting_data['greeting']}! {greeting_data['emoji']}</div>
+        <div class="message">{greeting_data['message']}</div>
+        
+        <div class="interest-box">
+            <div class="interest-text">💼 I would love to work and contribute with your company</div>
+            <div class="contribution-text">
+                Looking forward to the opportunity to be part of your team and make meaningful contributions.
+            </div>
+        </div>
+        
+        <div class="thank-you">Thank you for your consideration.</div>
+    </div>
 </body>
 </html>
 """
@@ -302,10 +374,6 @@ Thank you.
         # Check if interview has passed
         time_remaining = self.get_time_remaining()
         
-        if time_remaining is None:
-            print("⚠️ Interview date has passed. Stopping automated reminders.")
-            return 0, 0
-        
         # Get current greeting
         greeting_data = self.get_greeting_content()
         
@@ -317,7 +385,10 @@ Thank you.
         print(f"\n{'='*60}")
         print(f"📧 Interview Reminder Campaign: {greeting_data['greeting']}")
         print(f"👥 Total recipients: {total}")
-        print(f"⏰ Time remaining: {time_remaining['formatted']}")
+        if time_remaining:
+            print(f"⏰ Time remaining: {time_remaining['formatted']}")
+        else:
+            print(f"💼 Post-interview follow-up message")
         print(f"🕐 Current time: {datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%Y-%m-%d %H:%M:%S IST')}")
         print(f"{'='*60}\n")
         
@@ -355,7 +426,7 @@ def main():
     print("""
     ╔══════════════════════════════════════════╗
     ║     Professional Interview Reminder      ║
-    ║         SpanIdea Systems Interview       ║
+    ║            MTX Group Interview           ║
     ╚══════════════════════════════════════════╝
     """)
     
