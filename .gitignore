@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.Python
+env/
+venv/
+*.egg-info/
+
+# Credentials (NEVER commit these!)
+credentials.json
+token.json
+*.key
+*.pem
+client_secret*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+
+# Testing
+test_*.json
+*.test.json
