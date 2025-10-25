@@ -1,4 +1,4 @@
-name: Interview Reminder - SpanIdea
+name: Interview Reminder - MTX Group
 
 on:
   # Schedule for 4 times daily until interview (Times in UTC)
@@ -54,7 +54,7 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" >> $GITHUB_STEP_SUMMARY
         echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Interview Date**: October 13, 2025 at 10:00 AM IST" >> $GITHUB_STEP_SUMMARY
+        echo "- **Interview Date**: October 27, 2025 at 10:00 AM IST" >> $GITHUB_STEP_SUMMARY
         echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Run Number**: ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
     
